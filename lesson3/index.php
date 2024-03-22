@@ -13,94 +13,87 @@
 
 
 <?php
-// Отправляем браузеру правильную кодировку,
-// файл index.php должен быть в кодировке UTF-8 без BOM.
+
 header('Content-Type: text/html; charset=UTF-8');
 
-// В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
-// и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  // В суперглобальном массиве $_GET PHP хранит все параметры, переданные в текущем запросе через URL.
   if (!empty($_GET['save'])) {
-    // Если есть параметр save, то выводим сообщение пользователю.
+
     print('Спасибо, результаты сохранены.');
   }
-  // Включаем содержимое файла form.php.
   include('form.php');
-  // Завершаем работу скрипта.
   exit();
 }
-// Иначе, если запрос был методом POST, т.е. нужно проверить данные и сохранить их в XML-файл.
 
 
 
 
-
-
-$name = $_POST['name'];
-$number=$_POST['number'];
-$email=$_POST['email'];
-$data=$_POST['data'];
-$radio=$_POST['radio'];
-$languages=$_POST['languages'];
-$biography=$_POST['biography'];
-$check_mark=$_POST['check_mark'];
-
-if(empty ($name)){
-  print("пустое поле имя");
-}
-if(empty ($number)){
-  print("пустое поле номер");
-}
-if(empty ($email)){
-  print("пустое поле email");
-}
-if(empty ($data)){
-  print("пустое поле дата");
-}
-if(empty ($radio)){
-  print("радио кнопка не выбрана");
-}
-if(empty ($lang)){
-  print("пустое поле язык");
-}
-if(empty ($biography)){
-  print("пустое поле биография");
-}
-if(empty ($check_mark)){
-  print("chekbox не выбран");
+function errp($error){
+  print("<div class='messageError'>$error</div>");
+  exit();
 }
 
+function val_empty($val, $name, $o = 0){
+  if(empty($val)){
+    if($o == 0){
+      errp("Заполните поле $name.<br/>");
+    }
+    if($o == 1){
+      errp("Выберите $name.<br/>");
+    }
+    if($o == 2){
+      errp("ознакомьтесь с контрактом<br/>");
+    }
+    exit();
+  }
+}
+
+$errors = '';
+$name = (isset($_POST['name']) ? $_POST['name'] : '');
+$number = (isset($_POST['number']) ? $_POST['number'] : '');
+$email = (isset($_POST['email']) ? $_POST['email'] : '');
+$data = (isset($_POST['data']) ? strtotime($_POST['data']) : '');
+$radio = (isset($_POST['radio']) ? $_POST['radio'] : '');
+$lang = (isset($_POST['lang']) ? $_POST['lang'] : '');
+$biography = (isset($_POST['biography']) ? $_POST['biography'] : '');
+$check_mark = (isset($_POST['check_mark']) ? $_POST['check_mark'] : '');
 
 
-$phone = preg_replace('/\D/', '', $phone);
+$number = preg_replace('/\D/', '', $number);
   
-$lang = array_map(function($item) { return "'" . $item . "'"; }, $lang);
 $langs = ($lang != '') ? implode(", ", $lang) : [];
 
-
-
-
-if(empty($name)){
+val_empty($name, "имя");
+val_empty($number, "телефон");
+val_empty($email, "email");
+val_empty($data, "дата");
+val_empty($radio, "пол", 1);
+val_empty($lang, "языки", 1);
+val_empty($biography, "биографию");
+val_empty($check_mark, "ознакомлен", 2);
+if(empty($fio)){
   print('пустое поле фио');
 }
 
-if(strlen($name) > 255 || count(explode(" ", $name)) < 2){
+if(strlen($name) > 255){
   $errors = 'Длина поля "ФИО" > 255 символов';
 }
+elseif(count(explode(" ", $name)) < 2){
+  $errors = 'Неверный формат ФИО';
+} 
 elseif(strlen($number) != 11){
   $errors = 'Неверное значение поля "Телефон"';
 }
-elseif(strlen($email) > 255){
+elseif(strlen($number) > 255){
   $errors = 'Длина поля "email" > 255 символов';
 }
 elseif(!preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/', $email)){
   $errors = 'Неверное значение поля "email"';
 }
-elseif(!is_numeric(strtotime($data)) || strtotime("now") < strtotime($data)){
+elseif(!is_numeric($data) || strtotime("now") < $birthday){
   $errors = 'Укажите корректно дату';
 }
-elseif($check_mark != "male" && $check_mark != "female"){
+elseif($radio != "male" && $radio != "female"){
   $errors = 'Укажите пол';
 }
 elseif(count($lang) == 0){
@@ -108,18 +101,30 @@ elseif(count($lang) == 0){
 }
 
 if ($errors != '') {
-  print($errors);
+  errp($errors);
+}
+
+$db = new PDO('mysql:host=localhost;dbname=u67404', 'u67360', '4232624',
+   [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
+$inQuery = implode(',', array_fill(0, count($lang), '?'));
+
+
+try {
+  $dbLangs = $db->prepare("SELECT id, name FROM languages WHERE name IN ($inQuery)");
+  foreach ($lang as $key => $value) {
+    $dbLangs->bindValue(($key+1), $value);
+  }
+  $dbLangs->execute();
+  $languages = $dbLangs->fetchAll(PDO::FETCH_ASSOC);
+}
+catch(PDOException $e){
+  print('Error : ' . $e->getMessage());
   exit();
 }
 
+echo $dbLangs->rowCount().'**'.count($lang);
 
-
-$db = new PDO('mysql:host=localhost;dbname=u67404', 'root', '');
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-print_r($langs);
-$dbLangs = $conn->query("SELECT id, name FROM languages WHERE name IN (?)");
-$stmt->execute([$langs]);
-$languages = $dbLangs->fetchAll(PDO::FETCH_ASSOC);
 if($dbLangs->rowCount() != count($lang)){
   $errors = 'Неверно выбраны языки';
 }
@@ -128,29 +133,21 @@ elseif(strlen($biography) > 65535){
 }
 
 if ($errors != '') {
-  print($errors);
+  errp($errors);
+}
+
+try {
+  $stmt = $db->prepare("INSERT INTO form_data (name, number, email, data, radio, biography) VALUES (?, ?, ?, ?, ?, ?)");
+  $stmt->execute([$name, $number, $email, $data, $radio, $biography]);
+  $fid = $db->lastInsertId();
+  $stmt1 = $db->prepare("INSERT INTO form_data_lang (id_form, id_lang) VALUES (?, ?)");
+  foreach($languages as $row){
+      $stmt1->execute([$fid, $row['id']]);
+  }
+}
+catch(PDOException $e){
+  print('Error : ' . $e->getMessage());
   exit();
 }
 
-
-
-
-//  Именованные метки.
-//$stmt = $db->prepare("INSERT INTO test (label,color) VALUES (:label,:color)");
-//$stmt -> execute(['label'=>'perfect', 'color'=>'green']);
- 
-//Еще вариант
-/*$stmt = $db->prepare("INSERT INTO users (firstname, lastname, email) VALUES (:firstname, :lastname, :email)");
-$stmt->bindParam(':firstname', $firstname);
-$stmt->bindParam(':lastname', $lastname);
-$stmt->bindParam(':email', $email);
-$firstname = "John";
-$lastname = "Smith";
-$email = "john@test.com";
-$stmt->execute();
-*/
-
-// Делаем перенаправление.
-// Если запись не сохраняется, но ошибок не видно, то можно закомментировать эту строку чтобы увидеть ошибку.
-// Если ошибок при этом не видно, то необходимо настроить параметр display_errors для PHP.
 header('Location: ?save=1');

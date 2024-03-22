@@ -44,18 +44,27 @@
               </div>
 
               <div>
-                Пол<br />
-                <label>
-                  <input type="radio" name="radio-group-1" value="Значение1" />М
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    checked="checked"
-                    name="radio-group-1"
-                    value="Значение2"
-                  />Ж
-                </label>
+                Пол
+                <br />
+                <div class="my-2">
+                  <label>
+                    <input
+                      class="ml-3"
+                      type="radio"
+                      name="radio-group-1"
+                      value="Значение1"
+                    />М
+                  </label>
+                  <label>
+                    <input
+                      class="ml-3"
+                      type="radio"
+                      checked="checked"
+                      name="radio-group-1"
+                      value="Значение2"
+                    />Ж
+                  </label>
+                </div>
               </div>
 
               <div>

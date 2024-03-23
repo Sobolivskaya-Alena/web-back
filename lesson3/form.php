@@ -2,13 +2,13 @@
       <form action="" method="post" id="forma">
         <div id="forma">
           <div class="container">
-            <div class="">
+            <div>
               <div class="header">
                 <h2><b>Форма обратной связи</b></h2>
               </div>
 
               <div>
-                <label class="">
+                <label>
                   <input name="name" class="input" placeholder="Ф. И .О" />
                 </label>
               </div>
@@ -39,7 +39,7 @@
 
               <div>
                 <label>
-                  <input name="date" class="input" type="date" />
+                  <input name="data" class="input" type="data" />
                 </label>
               </div>
 
@@ -71,24 +71,24 @@
                 <label class="input">
                   Любимый язык программирования<br />
                   <select class="my-2" name="language1" multiple="multiple">
-                    <option value="Значение1" selected="selected">
+                    <option value="Значение1">
                       Pascal
                     </option>
-                    <option value="Значение2" selected="selected">C</option>
-                    <option value="Значение3" selected="selected">C++</option>
-                    <option value="Значение2" selected="selected">
+                    <option value="Значение2">C</option>
+                    <option value="Значение3">C++</option>
+                    <option value="Значение4">
                       JavaScript
                     </option>
-                    <option value="Значение3" selected="selected">PHP</option>
-                    <option value="Значение2">Python</option>
-                    <option value="Значение3" selected="selected">Java</option>
-                    <option value="Значение2" selected="selected">
+                    <option value="Значение5" >PHP</option>
+                    <option value="Значение6" selected="selected">Python</option>
+                    <option value="Значение7" >Java</option>
+                    <option value="Значение8" >
                       Haskel
                     </option>
-                    <option value="Значение3" selected="selected">
+                    <option value="Значение9">
                       Clojure
                     </option>
-                    <option value="Значение3" selected="selected">Scala</option>
+                    <option value="Значение10">Scala</option>
                   </select>
                 </label>
               </div>

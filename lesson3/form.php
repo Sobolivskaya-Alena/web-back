@@ -61,7 +61,6 @@
               <input
                 class="ml-3"
                 type="radio"
-                checked="checked"
                 name="radio-group-1"
                 value="f"
               />Ж

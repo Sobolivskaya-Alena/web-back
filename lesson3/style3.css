@@ -1,6 +1,6 @@
 form{
   border: 6px solid rgba(28, 20, 173, 0.674);
-  padding: 20px;
+  padding: 30px;
 }
 
 body{
@@ -19,7 +19,6 @@ body{
 
 .header {
   text-transform: uppercase;
-  letter-spacing: 1px;
   color: rgba(28, 20, 173, 0.674);
   text-align: center;
 }
@@ -32,11 +31,12 @@ body{
   margin-top: 5px;
 }
 
-.form_button{  width: 100%;
+.form_button{  
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60px;
+  min-height: 50px;
   background-color:rgba(28, 20, 173, 0.674);
   color: #fff;
   font-size: 18px;
@@ -60,19 +60,6 @@ body{
 
 select[multiple] {
   width: 100%;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  outline: 0;
-  box-shadow: none;
-  border: 0!important;
-  background: #ffffff;
-  background-image: none;
-  padding: 0 .5em;
-  color: #0b0b0b;
-  cursor: pointer;
-  font-size: 1em;
   font-family: 'Open Sans', sans-serif;
 }
 

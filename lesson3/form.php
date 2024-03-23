@@ -36,7 +36,12 @@
 
         <div>
           <label>
-            <input name="data" class="input" type="data" />
+            <input
+              name="data"
+              class="input"
+              type="data"
+              placeholder="Дата рождения"
+            />
           </label>
         </div>
 

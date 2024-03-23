@@ -93,7 +93,7 @@ elseif(!preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/', $email)){
 elseif(!is_numeric($data) || strtotime("now") < $data){
   $errors = 'Укажите корректно дату';
 }
-elseif($radio != "male" && $radio != "female"){
+elseif($radio != "m" && $radio != "f"){
   $errors = 'Укажите пол';
 }
 elseif(count($lang) == 0){

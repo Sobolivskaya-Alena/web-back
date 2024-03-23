@@ -54,7 +54,7 @@
                 class="ml-3"
                 type="radio"
                 name="radio-group-1"
-                value="Значение1"
+                value="m"
               />М
             </label>
             <label>
@@ -63,7 +63,7 @@
                 type="radio"
                 checked="checked"
                 name="radio-group-1"
-                value="Значение2"
+                value="f"
               />Ж
             </label>
           </div>

@@ -90,7 +90,7 @@ elseif(strlen($number) > 255){
 elseif(!preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/', $email)){
   $errors = 'Неверное значение поля "email"';
 }
-elseif(!is_numeric($data) || strtotime("now") < $birthday){
+elseif(!is_numeric($data) || strtotime("now") < $data){
   $errors = 'Укажите корректно дату';
 }
 elseif($radio != "male" && $radio != "female"){
@@ -104,7 +104,7 @@ if ($errors != '') {
   errp($errors);
 }
 
-$db = new PDO('mysql:host=localhost;dbname=u67404', 'u67360', '4232624',
+$db = new PDO('mysql:host=localhost;dbname=u67360', '4232624',
    [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
 $inQuery = implode(',', array_fill(0, count($lang), '?'));

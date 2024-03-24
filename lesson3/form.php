@@ -39,8 +39,7 @@
             <input
               name="data"
               class="input"
-              type="data"
-              placeholder="Дата рождения"
+              type="date"
             />
           </label>
         </div>
@@ -53,7 +52,7 @@
               <input
                 class="ml-3"
                 type="radio"
-                name="radio-group-1"
+                name="radio"
                 value="m"
               />М
             </label>
@@ -61,7 +60,7 @@
               <input
                 class="ml-3"
                 type="radio"
-                name="radio-group-1"
+                name="radio"
                 value="f"
               />Ж
             </label>
@@ -71,17 +70,17 @@
         <div>
           <label class="input">
             Любимый язык программирования<br />
-            <select class="my-2" name="language1" multiple="multiple">
-              <option value="Значение1">Pascal</option>
-              <option value="Значение2">C</option>
-              <option value="Значение3">C++</option>
-              <option value="Значение4">JavaScript</option>
-              <option value="Значение5">PHP</option>
-              <option value="Значение6" selected="selected">Python</option>
-              <option value="Значение7">Java</option>
-              <option value="Значение8">Haskel</option>
-              <option value="Значение9">Clojure</option>
-              <option value="Значение10">Scala</option>
+            <select class="my-2" name="lang" multiple="multiple">
+              <option value="Pascal">Pascal</option>
+              <option value="C">C</option>
+              <option value="C++">C++</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="PHP">PHP</option>
+              <option value="Python">Python</option>
+              <option value="Java">Java</option>
+              <option value="Haskel">Haskel</option>
+              <option value="Clojure">Clojure</option>
+              <option value="Scala">Scala</option>
             </select>
           </label>
         </div>
@@ -95,8 +94,8 @@
         </div>
 
         <div>
-          <label>
-            <input type="checkbox" checked="checked" name="check_mark" />
+          <label for="oznakomlen">
+            <input type="checkbox" name="check_mark" id="oznakomlen"/>
             с контрактом ознакомлен(а)
           </label>
         </div>

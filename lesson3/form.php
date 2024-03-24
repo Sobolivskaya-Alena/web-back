@@ -101,3 +101,5 @@
         <button type="submit" class="form_button my-3">Отправить</button>
       </div>
     </form>
+</body>
+</html>

@@ -53,7 +53,7 @@ $email = (isset($_POST['email']) ? $_POST['email'] : '');
 $data = (isset($_POST['data']) ? strtotime($_POST['data']) : '');
 $radio = (isset($_POST['radio']) ? $_POST['radio'] : '');
 $lang = (isset($_POST['lang']) ? $_POST['lang'] : '');
-$data = (isset($_POST['data']) ? $_POST['data'] : '');
+$biography = (isset($_POST['biography']) ? $_POST['biography'] : '');
 $check_mark = (isset($_POST['check_mark']) ? $_POST['check_mark'] : '');
 
 
@@ -67,7 +67,7 @@ val_empty($email, "email");
 val_empty($data, "дата");
 val_empty($radio, "пол", 1);
 val_empty($lang, "языки", 1);
-val_empty($biography, "биографию");
+val_empty($biography, "биография");
 val_empty($check_mark, "ознакомлен", 2);
 
 if(empty($name)){

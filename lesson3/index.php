@@ -67,7 +67,7 @@ val_empty($email, "email");
 val_empty($data, "дата");
 val_empty($radio, "пол", 1);
 val_empty($lang, "языки", 1);
-val_empty($data, "биографию");
+val_empty($biography, "биографию");
 val_empty($check_mark, "ознакомлен", 2);
 
 if(empty($name)){

@@ -35,7 +35,7 @@
           <label class="input">
             <div>Любимый язык программирования</div>
             <select class="my-2" name="language[]" multiple="multiple">
-              <option value="Pascal">Pascal</option>
+              <option value="Pascal">P</option>
               <option value="C">C</option>
               <option value="C++">C++</option>
               <option value="JavaScript">JavaScript</option>

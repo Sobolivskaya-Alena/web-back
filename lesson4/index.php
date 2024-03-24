@@ -133,7 +133,7 @@ if ($errors != '') {
 }
 
 try {
-  $stmt = $db->prepare("INSERT INTO form_data (name, number, email, date, radio, biography) VALUES (?, ?, ?, ?, ?, ?)");
+  $stmt = $db->prepare("INSERT INTO form_data (fio, number, email, date, radio, biography) VALUES (?, ?, ?, ?, ?, ?)");
   $stmt->execute([$fio, $number, $email, $date, $radio, $biography]);
   $fid = $db->lastInsertId();
   $stmt1 = $db->prepare("INSERT INTO form_data_lang (id_form, id_lang) VALUES (?, ?)");

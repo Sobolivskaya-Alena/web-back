@@ -6,7 +6,7 @@
 
         <div>
           <label>
-            <input name="name" class="input" placeholder="Ф. И .О" />
+            <input name="name" type="text" class="input" placeholder="Ф. И .О" />
           </label>
         </div>
 
@@ -16,9 +16,7 @@
               type="tel"
               name="number"
               class="input"
-              list="tel-list"
               placeholder="Номер телефона"
-              pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
             />
           </label>
         </div>
@@ -67,8 +65,8 @@
           </div>
         </div>
 
-        <div class="input">
-         
+        <div >
+          <label class="input">
             Любимый язык программирования<br />
             <select  id="lang" class="my-2" name="lang[]" multiple="multiple">
               <option value="Pascal">Pascal</option>
@@ -82,7 +80,7 @@
               <option value="Clojure">Clojure</option>
               <option value="Scala">Scala</option>
             </select>
-        
+</label>
         </div>
 
         <div class="my-3">

@@ -69,7 +69,8 @@ val_empty($radio, "пол", 1);
 val_empty($lang, "языки", 1);
 val_empty($data, "биографию");
 val_empty($check_mark, "ознакомлен", 2);
-if(empty($fio)){
+
+if(empty($name)){
   print('пустое поле фио');
 }
 
@@ -82,7 +83,7 @@ elseif(count(explode(" ", $name)) < 2){
 elseif(strlen($number) != 11){
   $errors = 'Неверное значение поля "Телефон"';
 }
-elseif(strlen($number) > 255){
+elseif(strlen($email) > 255){
   $errors = 'Длина поля "email" > 255 символов';
 }
 elseif(!preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/', $email)){

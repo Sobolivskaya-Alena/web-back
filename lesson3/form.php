@@ -67,10 +67,10 @@
           </div>
         </div>
 
-        <div>
-          <label class="input">
+        <div class="input">
+         
             Любимый язык программирования<br />
-            <select class="my-2" name="lang" multiple="multiple">
+            <select  id="lang" class="my-2" name="lang[]" multiple="multiple">
               <option value="Pascal">Pascal</option>
               <option value="C">C</option>
               <option value="C++">C++</option>
@@ -82,7 +82,7 @@
               <option value="Clojure">Clojure</option>
               <option value="Scala">Scala</option>
             </select>
-          </label>
+        
         </div>
 
         <div class="my-3">

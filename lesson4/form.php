@@ -10,7 +10,7 @@
         </div>
 
         <div>
-          <label> <input type="tel" name="phone" class="input" placeholder="Номер телефона" /> </label>
+          <label> <input type="tel" name="number" class="input" placeholder="Номер телефона" /> </label>
         </div>
 
         <div>

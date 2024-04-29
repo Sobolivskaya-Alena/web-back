@@ -55,6 +55,7 @@
                 type="radio"
                 name="radio"
                 value="m"
+                checked
               />М
             </label>
             <label>

@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   val_empty("biography", $biography);
   val_empty("check_mark",$check_mark);
 
-  $langsa = explode(',', $values['lang']);
+  $langsarray = explode(',', $values['lang']);
 
   include('form.php');
 }

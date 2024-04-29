@@ -70,7 +70,7 @@
         </div>
 
         <div>
-          <label class="my-3 input">
+          <label class="input">
             Любимый язык программирования<br />
             <select  id="lang" class="my-2 <?php echo (isp($errors['lang']) != NULL) ? 'borred' : ''; ?>"  name="lang[]" multiple="multiple">
               <option value="Pascal" <?php echo (in_array('Pascal', $langsa)) ? 'selected' : ''; ?>>Pascal</option>
@@ -88,7 +88,7 @@
           </label>
         </div>
 
-        <div class="my-3">
+        <div>
           Биография <br />
           <label>
             <textarea name="biography" placeholder="Биография" class="input <?php echo (isp($errors['biography']) != NULL) ? 'borred' : ''; ?>"><?php echo isp($values['biography']); ?></textarea>
@@ -97,7 +97,7 @@
         </div>
 
       
-        <div class="my-3">
+        <div >
             <input type="checkbox" name="check_mark" id="oznakomlen" <?php echo ( isp($values['check_mark']) != NULL) ? 'checked' : ''; ?>>
             <label for="oznakomlen" class="<?php echo (isp($errors['check_mark']) != NULL) ? 'colred' : ''; ?>">С контрактом ознакомлен (а)</label>
             <div class="errpodinp"><?php echo $messages['check_mark']?></div>

@@ -6,14 +6,14 @@ $db;
 include('database.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  $fio = (!empty($_COOKIE['name_error']) ? $_COOKIE['name_error'] : '');
-  $phone = (!empty($_COOKIE['number_error']) ? $_COOKIE['number_error'] : '');
+  $name = (!empty($_COOKIE['name_error']) ? $_COOKIE['name_error'] : '');
+  $number = (!empty($_COOKIE['number_error']) ? $_COOKIE['number_error'] : '');
   $email = (!empty($_COOKIE['email_error']) ? $_COOKIE['email_error'] : '');
-  $birthday = (!empty($_COOKIE['data_error']) ? strtotime($_COOKIE['data_error']) : '');
-  $gender = (!empty($_COOKIE['radio_error']) ? $_COOKIE['radio_error'] : '');
+  $data = (!empty($_COOKIE['data_error']) ? strtotime($_COOKIE['data_error']) : '');
+  $radio = (!empty($_COOKIE['radio_error']) ? $_COOKIE['radio_error'] : '');
   $like_lang = (!empty($_COOKIE['like_lang_error']) ? $_COOKIE['like_lang_error'] : '');
   $biography = (!empty($_COOKIE['biography_error']) ? $_COOKIE['biography_error'] : '');
-  $oznakomlen = (!empty($_COOKIE['check_mark_error']) ? $_COOKIE['_error'] : '');
+  $check_mark = (!empty($_COOKIE['check_mark_error']) ? $_COOKIE['_error'] : '');
 
   $errors = array();
   $messages = array();
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $errors[$enName] = !empty($_COOKIE[$enName.'_error']);
     $messages[$enName] = "<div class='messageError'>$val</div>";
     $values[$enName] = empty($_COOKIE[$enName.'_value']) ? '' : $_COOKIE[$enName.'_value'];
-    del_cook($enName);
+    setcookie($enName.'_error', '', time() - 30 * 24 * 60 * 60);
     return;
   }
   

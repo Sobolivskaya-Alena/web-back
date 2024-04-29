@@ -97,7 +97,7 @@
 
       
         <div>
-            <input type="checkbox" name="check_mark" id="oznakomlen" <?php echo ($values['oznakomlen'] != NULL) ? 'checked' : ''; ?>>
+            <input type="checkbox" name="check_mark" id="oznakomlen" <?php echo ($values['check_mark'] != NULL) ? 'checked' : ''; ?>>
             <label for="oznakomlen" class="<?php echo ($errors['oznakomlen'] != NULL) ? 'colred' : ''; ?>">С контрактом ознакомлен (а)</label>
             <div class="errpodinp"><?php echo $messages['oznakomlen']?></div>
         </div>

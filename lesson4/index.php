@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   
   function val_empty($enName, $val){
     global $errors, $values, $messages;
-    echo"*";
     $errors[$enName] = !empty($_COOKIE[$enName.'_error']);
     $messages[$enName] = "<div class='messageError'>$val</div>";
     $values[$enName] = empty($_COOKIE[$enName.'_value']) ? '' : $_COOKIE[$enName.'_value'];

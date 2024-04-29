@@ -77,7 +77,7 @@ else{
     
     if($cook == 'lang'){
       global $lang;
-      $setVal = ($lang != '') ? implode(",", $lang) : ''
+      $setVal = ($lang != '') ? implode(",", $lang) : '';
     }
     
     setcookie($cook.'_value', $setVal, time() + 30 * 24 * 60 * 60); 

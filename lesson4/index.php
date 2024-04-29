@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $email = (!empty($_COOKIE['email_error']) ? $_COOKIE['email_error'] : '');
   $data = (!empty($_COOKIE['data_error']) ? strtotime($_COOKIE['data_error']) : '');
   $radio = (!empty($_COOKIE['radio_error']) ? $_COOKIE['radio_error'] : '');
-  $like_lang = (!empty($_COOKIE['like_lang_error']) ? $_COOKIE['like_lang_error'] : '');
+  $lang = (!empty($_COOKIE['lang_error']) ? $_COOKIE['lang_error'] : '');
   $biography = (!empty($_COOKIE['biography_error']) ? $_COOKIE['biography_error'] : '');
   $check_mark = (!empty($_COOKIE['check_mark_error']) ? $_COOKIE['_error'] : '');
 
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   val_empty("biography", $biography);
   val_empty("check_mark",$check_mark);
 
-  $like_langsa = explode(',', $values['like_lang']);
+  $langsa = explode(',', $values['lang']);
 
   include('form.php');
 }
@@ -59,7 +59,7 @@ else{ //POST
   $email = (!empty($_POST['email']) ? $_POST['email'] : '');
   $data = (!empty($_POST['data']) ? strtotime($_POST['data']) : '');
   $radio = (!empty($_POST['radio']) ? $_POST['radio'] : '');
-  $like_lang = (!empty($_POST['like_lang']) ? $_POST['like_lang'] : '');
+  $lang = (!empty($_POST['lang']) ? $_POST['lang'] : '');
   $biography = (!empty($_POST['biography']) ? $_POST['biography'] : '');
   $check_mark = (!empty($_POST['check_mark']) ? $_POST['check_mark'] : '');
   $error = false;
@@ -76,9 +76,9 @@ else{ //POST
       $res = true;
     }
     
-    if($cook == 'like_lang'){
-      global $like_lang;
-      $setVal = ($like_lang != '') ? implode(",", $like_lang) : '';
+    if($cook == 'lang'){
+      global $lang;
+      $setVal = ($lang != '') ? implode(",", $lang) : '';
     }
     
     setcookie($cook.'_value', $setVal, time() + 30 * 24 * 60 * 60); //сохраняем на месяц
@@ -104,12 +104,12 @@ else{ //POST
     val_empty('data', "Неверно введена дата рождения, дата больше настоящей", (strtotime("now") < $data));
   }
   val_empty('radio', "Выберите пол", (empty($radio) || !preg_match('/^(m|f)$/', $radio)));
-  if(!val_empty('like_lang', "Выберите хотя бы один язык", empty($like_lang))){
+  if(!val_empty('lang', "Выберите хотя бы один язык", empty($lang))){
     conn();
     try {
-      $inQuery = implode(',', array_fill(0, count($like_lang), '?'));
+      $inQuery = implode(',', array_fill(0, count($lang), '?'));
       $dbLangs = $db->prepare("SELECT id, name FROM languages WHERE name IN ($inQuery)");
-      foreach ($like_lang as $key => $value) {
+      foreach ($lang as $key => $value) {
         $dbLangs->bindValue(($key+1), $value);
       }
       $dbLangs->execute();
@@ -120,7 +120,7 @@ else{ //POST
       exit();
     }
     
-    val_empty('like_lang', 'Неверно выбраны языки', $dbLangs->rowCount() != count($like_lang));
+    val_empty('lang', 'Неверно выбраны языки', $dbLangs->rowCount() != count($lang));
   }
   if(!val_empty('biography', 'Заполните поле', empty($biography))){
     val_empty('biography', 'Длина текста > 65 535 символов', strlen($biography) > 65535);
@@ -139,7 +139,7 @@ else{ //POST
     setcookie('email_error', '', time() - 30 * 24 * 60 * 60);
     setcookie('data_error', '', time() - 30 * 24 * 60 * 60);
     setcookie('radio_error', '', time() - 30 * 24 * 60 * 60);
-    setcookie('like_lang_error', '', time() - 30 * 24 * 60 * 60);
+    setcookie('lang_error', '', time() - 30 * 24 * 60 * 60);
     setcookie('biography_error', '', time() - 30 * 24 * 60 * 60);
     setcookie('check_mark_error', '', time() - 30 * 24 * 60 * 60);
     
@@ -163,7 +163,7 @@ else{ //POST
   setcookie('email_value', $email, time() + 24 * 60 * 60 * 365);
   setcookie('data_value', $data, time() + 24 * 60 * 60 * 365);
   setcookie('radio_value', $radio, time() + 24 * 60 * 60 * 365);
-  setcookie('like_value', $like, time() + 24 * 60 * 60 * 365);
+  setcookie('lang_value', $lang, time() + 24 * 60 * 60 * 365);
   setcookie('biography_value', $biography, time() + 24 * 60 * 60 * 365);
   setcookie('check_mark_value', $check_mark, time() + 24 * 60 * 60 * 365);
 

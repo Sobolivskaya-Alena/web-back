@@ -73,16 +73,16 @@
           <label class="input">
             Любимый язык программирования<br />
             <select  id="lang" class="my-2 <?php echo (isp($errors['lang']) != NULL) ? 'borred' : ''; ?>"  name="lang[]" multiple="multiple">
-              <option value="Pascal" <?php echo (in_array('Pascal', $langsa)) ? 'selected' : ''; ?>>Pascal</option>
-              <option value="C" <?php echo (in_array('C', $langsa)) ? 'selected' : ''; ?>>C</option>
-              <option value="C++" <?php echo (in_array('C++', $langsa)) ? 'selected' : ''; ?>>C++</option>
-              <option value="JavaScript" <?php echo (in_array('JavaScript', $langsa)) ? 'selected' : ''; ?>>JavaScript</option>
-              <option value="PHP" <?php echo (in_array('PHP', $langsa)) ? 'selected' : ''; ?>>PHP</option>
-              <option value="Python" <?php echo (in_array('Python', $langsa)) ? 'selected' : ''; ?>>Python</option>
-              <option value="Java" <?php echo (in_array('Java', $langsa)) ? 'selected' : ''; ?>>Java</option>
-              <option value="Haskel" <?php echo (in_array('Haskel', $langsa)) ? 'selected' : ''; ?>>Haskel</option>
-              <option value="Clojure" <?php echo (in_array('Clojure', $langsa)) ? 'selected' : ''; ?>>Clojure</option>
-              <option value="Scala" <?php echo (in_array('Scala', $langsa)) ? 'selected' : ''; ?>>Scala</option>
+              <option value="Pascal" <?php echo (in_array('Pascal', $langsarray)) ? 'selected' : ''; ?>>Pascal</option>
+              <option value="C" <?php echo (in_array('C', $langsarray)) ? 'selected' : ''; ?>>C</option>
+              <option value="C++" <?php echo (in_array('C++', $langsarray)) ? 'selected' : ''; ?>>C++</option>
+              <option value="JavaScript" <?php echo (in_array('JavaScript', $langsarray)) ? 'selected' : ''; ?>>JavaScript</option>
+              <option value="PHP" <?php echo (in_array('PHP', $langsarray)) ? 'selected' : ''; ?>>PHP</option>
+              <option value="Python" <?php echo (in_array('Python', $langsarray) ? 'selected' : ''; ?>>Python</option>
+              <option value="Java" <?php echo (in_array('Java', $langsarray)) ? 'selected' : ''; ?>>Java</option>
+              <option value="Haskel" <?php echo (in_array('Haskel', $langsarray)) ? 'selected' : ''; ?>>Haskel</option>
+              <option value="Clojure" <?php echo (in_array('Clojure', $langsarray)) ? 'selected' : ''; ?>>Clojure</option>
+              <option value="Scala" <?php echo (in_array('Scala', $langsarray)) ? 'selected' : ''; ?>>Scala</option>
             </select>
             <div class="errpodinp"><?php echo $messages['lang']?></div>
           </label>

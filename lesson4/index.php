@@ -5,6 +5,11 @@ $db;
 
 include('database.php');
 
+function isp($value){
+  if(isset($value)) return $value;
+  return;
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $name = (!empty($_COOKIE['name_error']) ? $_COOKIE['name_error'] : '');
   $number = (!empty($_COOKIE['number_error']) ? $_COOKIE['number_error'] : '');

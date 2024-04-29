@@ -45,7 +45,7 @@
           </label>
         </div>
 
-        <div>
+        <div class="my-3">
           Пол
           <br />
           <div class="my-2">
@@ -70,7 +70,7 @@
         </div>
 
         <div>
-          <label class="input">
+          <label class="my-3 input">
             Любимый язык программирования<br />
             <select  id="lang" class="my-2 <?php echo (isp($errors['lang']) != NULL) ? 'borred' : ''; ?>"  name="lang[]" multiple="multiple">
               <option value="Pascal" <?php echo (in_array('Pascal', $langsa)) ? 'selected' : ''; ?>>Pascal</option>
@@ -97,7 +97,7 @@
         </div>
 
       
-        <div>
+        <div class="my-3">
             <input type="checkbox" name="check_mark" id="oznakomlen" <?php echo ( isp($values['check_mark']) != NULL) ? 'checked' : ''; ?>>
             <label for="oznakomlen" class="<?php echo (isp($errors['check_mark']) != NULL) ? 'colred' : ''; ?>">С контрактом ознакомлен (а)</label>
             <div class="errpodinp"><?php echo $messages['check_mark']?></div>

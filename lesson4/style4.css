@@ -39,6 +39,17 @@ body{
   width: 100%;
 }
 
+.radio{
+  margin: 10px;
+}
+.select{
+  margin: 10px;
+}
+
+.check_mark{
+  margin: 10px;
+}
+
 .form_button{  
   width: 100%;
   display: flex;
@@ -70,3 +81,13 @@ select[multiple] {
   width: 100%;
   font-family: 'Open Sans', sans-serif;
 }
+
+
+
+
+
+
+
+
+
+

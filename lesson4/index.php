@@ -163,7 +163,7 @@ else{ //POST
   setcookie('email_value', $email, time() + 24 * 60 * 60 * 365);
   setcookie('data_value', $data, time() + 24 * 60 * 60 * 365);
   setcookie('radio_value', $radio, time() + 24 * 60 * 60 * 365);
-  setcookie('lang_value', $lang, time() + 24 * 60 * 60 * 365);
+  setcookie('lang_value', implode(",", $lang), time() + 24 * 60 * 60 * 365);
   setcookie('biography_value', $biography, time() + 24 * 60 * 60 * 365);
   setcookie('check_mark_value', $check_mark, time() + 24 * 60 * 60 * 365);
 

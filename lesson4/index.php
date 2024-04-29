@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   
   function val_empty($enName, $val){
     global $errors, $values, $messages;
+    echo"*";
     $errors[$enName] = !empty($_COOKIE[$enName.'_error']);
     $messages[$enName] = "<div class='messageError'>$val</div>";
     $values[$enName] = empty($_COOKIE[$enName.'_value']) ? '' : $_COOKIE[$enName.'_value'];
@@ -104,7 +105,7 @@ else{ //POST
   }
   val_empty('radio', "Выберите пол", (empty($radio) || !preg_match('/^(m|f)$/', $radio)));
   if(!val_empty('lang', "Выберите хотя бы один язык", empty($lang))){
-    conn();
+   
     try {
       $inQuery = implode(',', array_fill(0, count($lang), '?'));
       $dbLangs = $db->prepare("SELECT id, name FROM languages WHERE name IN ($inQuery)");

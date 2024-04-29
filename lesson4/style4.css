@@ -3,6 +3,13 @@ form{
   padding: 30px;
 }
 
+.message{
+  color:green
+}
+.borred{
+  border-color: red;
+}
+
 body{
   height: 100%;
   line-height: 1;
@@ -29,6 +36,7 @@ body{
   width: 20em;
   margin-bottom: 10px;
   margin-top: 5px;
+  width: 100%;
 }
 
 .form_button{  
@@ -62,13 +70,3 @@ select[multiple] {
   width: 100%;
   font-family: 'Open Sans', sans-serif;
 }
-
-
-
-
-
-
-
-
-
-

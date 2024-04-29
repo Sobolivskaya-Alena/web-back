@@ -1,18 +1,9 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
 
-
-function del_cook($cook, $del_val = 0){
-  setcookie($cook.'_error', '', time() - 30 * 24 * 60 * 60);
-  // if($del_val) setcookie($cook.'_value', '', time() - 30 * 24 * 60 * 60);
-}
-
 $db;
 
-function conn(){
-  global $db;
-  include('database.php');
-}
+include('database.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $fio = (!empty($_COOKIE['name_error']) ? $_COOKIE['name_error'] : '');
@@ -41,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   if (!empty($_COOKIE['save'])) {
     setcookie('save', '', 100000);
     // Если есть параметр save, то выводим сообщение пользователю.
-    $messages['success'] = '<div class="message">Спасибо, данные сохранены.</div>';
+    $messages['success'] = '<div class="message">Информация сохранена.</div>';
   }
 
   val_empty($name, "имя");
@@ -58,14 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   include('form.php');
 }
 else{ //POST
-  $fio = (!empty($_POST['name']) ? $_POST['name'] : '');
-  $phone = (!empty($_POST['number']) ? $_POST['number'] : '');
+  $name = (!empty($_POST['name']) ? $_POST['name'] : '');
+  $number = (!empty($_POST['number']) ? $_POST['number'] : '');
   $email = (!empty($_POST['email']) ? $_POST['email'] : '');
-  $birthday = (!empty($_POST['data']) ? strtotime($_POST['data']) : '');
-  $gender = (!empty($_POST['radio']) ? $_POST['radio'] : '');
+  $data = (!empty($_POST['data']) ? strtotime($_POST['data']) : '');
+  $radio = (!empty($_POST['radio']) ? $_POST['radio'] : '');
   $like_lang = (!empty($_POST['like_lang']) ? $_POST['like_lang'] : '');
   $biography = (!empty($_POST['biography']) ? $_POST['biography'] : '');
-  $oznakomlen = (!empty($_POST['check_mark']) ? $_POST['check_mark'] : '');
+  $check_mark = (!empty($_POST['check_mark']) ? $_POST['check_mark'] : '');
   $error = false;
 
   $number1 = preg_replace('/\D/', '', $number);
@@ -107,7 +98,7 @@ else{ //POST
   if(!val_empty('data', "Выберите дату рождения", empty($data))){
     val_empty('data', "Неверно введена дата рождения, дата больше настоящей", (strtotime("now") < $data));
   }
-  val_empty('radio', "Выберите пол", (empty($radio) || !preg_match('/^(male|female)$/', $radio)));
+  val_empty('radio', "Выберите пол", (empty($radio) || !preg_match('/^(m|f)$/', $radio)));
   if(!val_empty('like_lang', "Выберите хотя бы один язык", empty($like_lang))){
     conn();
     try {
@@ -138,14 +129,15 @@ else{ //POST
   }
   else {
     // Удаляем Cookies с признаками ошибок.
-    del_cook('name');
-    del_cook('number');
-    del_cook('email');
-    del_cook('data');
-    del_cook('radio');
-    del_cook('like_lang');
-    del_cook('biography');
-    del_cook('check_mark');
+    setcookie('name_error', '', time() - 30 * 24 * 60 * 60);
+    setcookie('number_error', '', time() - 30 * 24 * 60 * 60);
+    setcookie('email_error', '', time() - 30 * 24 * 60 * 60);
+    setcookie('data_error', '', time() - 30 * 24 * 60 * 60);
+    setcookie('radio_error', '', time() - 30 * 24 * 60 * 60);
+    setcookie('like_lang_error', '', time() - 30 * 24 * 60 * 60);
+    setcookie('biography_error', '', time() - 30 * 24 * 60 * 60);
+    setcookie('check_mark_error', '', time() - 30 * 24 * 60 * 60);
+    
   }
   
   try {
@@ -177,3 +169,6 @@ else{ //POST
   header('Location: index.php');
 }
 ?>
+
+
+

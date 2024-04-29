@@ -40,14 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $messages['success'] = '<div class="message">Информация сохранена.</div>';
   }
 
-  val_empty($name, "имя");
-  val_empty($number, "телефон");
-  val_empty($email, "email");
-  val_empty($data, "дата");
-  val_empty($radio, "пол", 1);
-  val_empty($lang, "языки", 1);
-  val_empty($biography, "биография");
-  val_empty($check_mark, "ознакомлен", 2);
+  val_empty("name", $name);
+  val_empty("number", $number);
+  val_empty("email", $email);
+  val_empty("data", $data);
+  val_empty("radio", $radio);
+  val_empty("lang", $lang);
+  val_empty("biography", $biography);
+  val_empty("check_mark",$check_mark);
 
   $like_langsa = explode(',', $values['like_lang']);
 

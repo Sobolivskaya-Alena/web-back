@@ -11,7 +11,7 @@ $db;
 
 function conn(){
   global $db;
-  include('connection.php');
+  include('database.php');
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {

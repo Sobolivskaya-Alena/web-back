@@ -39,6 +39,23 @@ body{
   width: 100%;
 }
 
+input[type="radio"]{
+  margin: 15px;
+}
+.form_button{
+  margin-top:10px;
+}
+.select{
+  margin: 10px;
+}
+
+textarea{
+  margin-top: 5px !important;
+}
+.check_mark{
+  margin: 10px;
+}
+
 .form_button{  
   width: 100%;
   display: flex;
@@ -69,14 +86,6 @@ body{
 select[multiple] {
   width: 100%;
   font-family: 'Open Sans', sans-serif;
+  margin-top:10px;
 }
-
-
-
-
-
-
-
-
-
 

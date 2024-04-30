@@ -24,19 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $messages = array();
   $values = array();
   
-  function val_empty($enName, $val){
+  function val_empty($pName, $val){
     global $errors, $values, $messages;
-    echo"*";
-    $errors[$enName] = !empty($_COOKIE[$enName.'_error']);
-    $messages[$enName] = "<div class='messageError'>$val</div>";
-    $values[$enName] = empty($_COOKIE[$enName.'_value']) ? '' : $_COOKIE[$enName.'_value'];
-    setcookie($enName.'_error', '', time() - 30 * 24 * 60 * 60);
+    $errors[$pName] = !empty($_COOKIE[$pName.'_error']);
+    $messages[$pName] = "<div class='messageError'>$val</div>";
+    $values[$pName] = empty($_COOKIE[$pName.'_value']) ? '' : $_COOKIE[$pName.'_value'];
+    setcookie($pName.'_error', '', time() - 30 * 24 * 60 * 60);
     return;
   }
   
   if (!empty($_COOKIE['save'])) {
     setcookie('save', '', 100000);
-    // Если есть параметр save, то выводим сообщение пользователю.
     $messages['success'] = '<div class="message">Информация сохранена.</div>';
   }
 
@@ -49,11 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   val_empty("biography", $biography);
   val_empty("check_mark",$check_mark);
 
-  $langsa = explode(',', $values['lang']);
+  $langsarray = explode(',', $values['lang']);
 
   include('form.php');
 }
-else{ //POST
+//POST
+else{ 
   $name = (!empty($_POST['name']) ? $_POST['name'] : '');
   $number = (!empty($_POST['number']) ? $_POST['number'] : '');
   $email = (!empty($_POST['email']) ? $_POST['email'] : '');
@@ -71,7 +70,7 @@ else{ //POST
     $res = false;
     $setVal = $_POST[$cook];
     if ($usl) {
-      setcookie($cook.'_error', $comment, time() + 24 * 60 * 60); //сохраняем на сутки
+      setcookie($cook.'_error', $comment, time() + 24 * 60 * 60); 
       $error = true;
       $res = true;
     }
@@ -81,13 +80,13 @@ else{ //POST
       $setVal = ($lang != '') ? implode(",", $lang) : '';
     }
     
-    setcookie($cook.'_value', $setVal, time() + 30 * 24 * 60 * 60); //сохраняем на месяц
+    setcookie($cook.'_value', $setVal, time() + 30 * 24 * 60 * 60); 
     return $res;
   }
   
   if(!val_empty('name', 'Заполните поле', empty($name))){
     if(!val_empty('name', 'Длина поля > 255 символов', strlen($name) > 255)){
-      val_empty('name', 'Поле не соответствует требованиям: <i>Фаимлмя Имя (Отчество)</i>, латиницей', !preg_match('/^([а-яё]+-?[а-яё]+)( [а-яё]+-?[а-яё]+){1,2}$/Diu', $name));
+      val_empty('name', 'Поле не соответствует требованиям: <i>Фаимлмя Имя (Отчество)</i>, кириллица', !preg_match('/^([а-яё]+-?[а-яё]+)( [а-яё]+-?[а-яё]+){1,2}$/Diu', $name));
     }
   }
   if(!val_empty('number', 'Заполните поле', empty($number))){
@@ -128,12 +127,10 @@ else{ //POST
   val_empty('check_mark', "Ознакомьтесь с контрактом", empty($check_mark));
   
   if ($error) {
-    // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
     header('Location: index.php');
     exit();
   }
   else {
-    // Удаляем Cookies с признаками ошибок.
     setcookie('name_error', '', time() - 30 * 24 * 60 * 60);
     setcookie('number_error', '', time() - 30 * 24 * 60 * 60);
     setcookie('email_error', '', time() - 30 * 24 * 60 * 60);
@@ -167,13 +164,8 @@ else{ //POST
   setcookie('biography_value', $biography, time() + 24 * 60 * 60 * 365);
   setcookie('check_mark_value', $check_mark, time() + 24 * 60 * 60 * 365);
 
-  // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
 
-  // Делаем перенаправление.
   header('Location: index.php');
 }
 ?>
-
-
-

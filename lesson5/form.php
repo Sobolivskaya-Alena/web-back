@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="bootstrap.min.css" />
-    <link href="style4.css" rel="stylesheet" type="text/css" />
-    <title>Задание №4</title>
+    <link href="style5.css" rel="stylesheet" type="text/css" />
+    <title>Задание №5</title>
   </head>
   <body class="m-4">
       

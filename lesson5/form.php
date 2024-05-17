@@ -54,24 +54,14 @@
           Пол
           <br />
           <div class="my-2">
-            <label>
-              <input
-                class="ml-3 <?php echo (isp($errors['radio']) != NULL) ? 'colred' : ''; ?>"
-                type="radio"
-                name="radio"
-                value="m"
-                checked
-              />
-              <span class="<?php echo ($errors['gender'] != NULL) ? 'colred' : ''; ?>">Мужской</span>
+          <label>
+                <input type="radio" name="radio" value="m" <?php if($values['radio'] == 'm') echo 'checked'; ?>>
+                <span class="ml-3 <?php echo ($errors['radio'] != NULL) ? 'colred' : ''; ?>">Мужской</span>
             </label>
+            <br>
             <label>
-              <input
-                class="ml-3 <?php echo (isp($errors['radio']) != NULL) ? 'colred' : ''; ?>"
-                type="radio"
-                name="radio"
-                value="f"
-              />
-              <span class="<?php echo ($errors['gender'] != NULL) ? 'colred' : ''; ?>">Женский</span>
+                <input type="radio" name="radio" value="f" <?php if($values['radio'] == 'f') echo 'checked'; ?>>
+                <span class="<?php echo ($errors['radio'] != NULL) ? 'colred' : ''; ?>">Женский</span>
             </label>
             <div class="errpodinp"><?php echo $messages['radio']?></div>
           </div>

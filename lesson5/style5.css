@@ -39,23 +39,6 @@ body{
   width: 100%;
 }
 
-input[type="radio"]{
-  margin: 15px;
-}
-.form_button{
-  margin-top:10px;
-}
-.select{
-  margin: 10px;
-}
-
-textarea{
-  margin-top: 5px !important;
-}
-.check_mark{
-  margin: 10px;
-}
-
 .form_button{  
   width: 100%;
   display: flex;
@@ -83,9 +66,45 @@ textarea{
   box-shadow: 0 2px 0 #0b0b0b;
 }
 
+
+.login_form{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  background-color:rgba(28, 20, 173, 0.674);
+  color: #fff;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 0 5px 0 #0b0b0b;
+  transition: background-color 0.5s ease 0s;
+  position: relative;
+  top: 0;
+}
+.login_form:hover{
+  background-color: rgb(61, 71, 124); 
+}
+.login_form:active{
+  top: 3px;
+  box-shadow: 0 2px 0 #0b0b0b;
+}
+
 select[multiple] {
   width: 100%;
   font-family: 'Open Sans', sans-serif;
-  margin-top:10px;
 }
+
+
+
+
+
+
+
+
+
 

@@ -83,7 +83,7 @@
           </label>
         </div>
 
-        <div class="m-3">
+        <div class="p-3">
           Биография <br />
           <label>
             <textarea name="biography" placeholder="Биография" class="input <?php echo (isp($errors['biography']) != NULL) ? 'borred' : ''; ?>"><?php echo isp($values['biography']); ?></textarea>

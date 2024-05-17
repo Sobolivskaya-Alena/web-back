@@ -15,7 +15,12 @@
         <div class="header">
           <h2><b>Форма обратной связи</b></h2>
         </div>
+        <?php 
+            if($log) echo '<button type="submit" class="logout_form" name="logout_form">Выйти</button>'; 
+            else echo '<a href="login.php" class="login_form" name="logout_form">Войти</a>';
+        ?>
         <div class="message"><?php if(isset($messages['success'])) echo $messages['success']; ?></div>
+        <div class="message message_info"><?php if(isset($messages['info'])) echo $messages['info']; ?></div>
         <div>
           <label>
             <input class="input <?php echo (isp($errors['name']) != NULL) ? 'borred' : ''; ?>" value="<?php echo isp($values['name']); ?>" type="text" name="name" placeholder="Ф.И.О">
@@ -56,7 +61,8 @@
                 name="radio"
                 value="m"
                 checked
-              />М
+              />
+              <span class="<?php echo ($errors['gender'] != NULL) ? 'colred' : ''; ?>">Мужской</span>
             </label>
             <label>
               <input
@@ -64,8 +70,10 @@
                 type="radio"
                 name="radio"
                 value="f"
-              />Ж
+              />
+              <span class="<?php echo ($errors['gender'] != NULL) ? 'colred' : ''; ?>">Женский</span>
             </label>
+            <div class="errpodinp"><?php echo $messages['radio']?></div>
           </div>
         </div>
 
@@ -73,23 +81,22 @@
           <label class="input">
             Любимый язык программирования<br />
             <select  id="lang" class="my-2 <?php echo (isp($errors['lang']) != NULL) ? 'borred' : ''; ?>"  name="lang[]" multiple="multiple">
-              <option value="Pascal" <?php echo (in_array('Pascal', $langsarray)) ? 'selected' : ''; ?>>Pascal</option>
-              <option value="C" <?php echo (in_array('C', $langsarray)) ? 'selected' : ''; ?>>C</option>
-              <option value="C++" <?php echo (in_array('C++', $langsarray)) ? 'selected' : ''; ?>>C++</option>
-              <option value="JavaScript" <?php echo (in_array('JavaScript', $langsarray)) ? 'selected' : ''; ?>>JavaScript</option>
-              <option value="PHP" <?php echo (in_array('PHP', $langsarray)) ? 'selected' : ''; ?>>PHP</option>
-              <option value="Python" <?php echo (in_array('Python', $langsarray)) ? 'selected' : ''; ?>>Python</option>
-              <option value="Java" <?php echo (in_array('Java', $langsarray)) ? 'selected' : ''; ?>>Java</option>
-              <option value="Haskel" <?php echo (in_array('Haskel', $langsarray)) ? 'selected' : ''; ?>>Haskel</option>
-              <option value="Clojure" <?php echo (in_array('Clojure', $langsarray)) ? 'selected' : ''; ?>>Clojure</option>
-              <option value="Scala" <?php echo (in_array('Scala', $langsarray)) ? 'selected' : ''; ?>>Scala</option>
+              <option value="Pascal" <?php echo (in_array('Pascal', $langsa)) ? 'selected' : ''; ?>>Pascal</option>
+              <option value="C" <?php echo (in_array('C', $langsa)) ? 'selected' : ''; ?>>C</option>
+              <option value="C++" <?php echo (in_array('C++', $langsa)) ? 'selected' : ''; ?>>C++</option>
+              <option value="JavaScript" <?php echo (in_array('JavaScript', $langsa)) ? 'selected' : ''; ?>>JavaScript</option>
+              <option value="PHP" <?php echo (in_array('PHP', $langsa)) ? 'selected' : ''; ?>>PHP</option>
+              <option value="Python" <?php echo (in_array('Python', $langsa)) ? 'selected' : ''; ?>>Python</option>
+              <option value="Java" <?php echo (in_array('Java', $langsa)) ? 'selected' : ''; ?>>Java</option>
+              <option value="Haskel" <?php echo (in_array('Haskel', $langsa)) ? 'selected' : ''; ?>>Haskel</option>
+              <option value="Clojure" <?php echo (in_array('Clojure', $langsa)) ? 'selected' : ''; ?>>Clojure</option>
+              <option value="Scala" <?php echo (in_array('Scala', $langsa)) ? 'selected' : ''; ?>>Scala</option>
             </select>
             <div class="errpodinp"><?php echo $messages['lang']?></div>
           </label>
         </div>
 
         <div>
-          <br/>
           Биография <br />
           <label>
             <textarea name="biography" placeholder="Биография" class="input <?php echo (isp($errors['biography']) != NULL) ? 'borred' : ''; ?>"><?php echo isp($values['biography']); ?></textarea>
@@ -104,7 +111,10 @@
             <div class="errpodinp"><?php echo $messages['check_mark']?></div>
         </div>
 
-        <button type="submit" class="form_button my-3">Отправить</button>
+        <?php
+            if($log) echo '<button type="submit" class="editBut">Изменить</button>';
+            else echo '<button type="submit">Отправить</button>';
+        ?>
       </div>
     </form>
 </body>

@@ -13,7 +13,7 @@
     <form action="" method="post">
       <div>
         <div class="header">
-          <h2><b>Форма </b></h2>
+          <h2><b>Форма обратной связи</b></h2>
         </div>
        
         <div class="message"><?php if(isset($messages['success'])) echo $messages['success']; ?></div>

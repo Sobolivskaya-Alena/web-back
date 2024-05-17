@@ -10,6 +10,11 @@ function isp($value){
   return;
 }
 
+function del_cook($cook, $vals = 0){
+  setcookie($cook.'_error', '', 100000);
+  if($vals) setcookie($cook.'_value', '', 100000);
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $name = (!empty($_COOKIE['name_error']) ? $_COOKIE['name_error'] : '');
   $number = (!empty($_COOKIE['number_error']) ? $_COOKIE['number_error'] : '');
@@ -23,19 +28,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $errors = array();
   $messages = array();
   $values = array();
-  
-  function val_empty($pName, $val){
-    global $errors, $values, $messages;
-    $errors[$pName] = !empty($_COOKIE[$pName.'_error']);
-    $messages[$pName] = "<div class='messageError'>$val</div>";
-    $values[$pName] = empty($_COOKIE[$pName.'_value']) ? '' : $_COOKIE[$pName.'_value'];
-    setcookie($pName.'_error', '', time() - 30 * 24 * 60 * 60);
+  $error = true;
+
+function setVal($enName, $param){
+  global $values;
+  $values[$enName] = empty($param) ? '' : strip_tags($param);
+}
+
+  function val_empty($enName, $val){
+    global $error, $errors, $values, $messages;
+    if($error) 
+    $error = empty($_COOKIE[$enName.'_error']);
+    $errors[$enName] = !empty($_COOKIE[$enName.'_error']);
+    $messages[$enName] = "<div class='messageError'>$val</div>";
+    $values[$enName] = empty($_COOKIE[$enName.'_value']) ? '' : $_COOKIE[$enName.'_value'];
+    del_cook($enName);
     return;
   }
   
   if (!empty($_COOKIE['save'])) {
     setcookie('save', '', 100000);
-    $messages['success'] = '<div class="message">Информация сохранена.</div>';
+    setcookie('login', '', 100000);
+    setcookie('password', '', 100000);
+    $messages['success'] = 'Данные сохранены';
+    if (!empty($_COOKIE['password'])) {
+      $messages['info'] = sprintf('Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong>
+        и паролем <strong>%s</strong> для изменения данных.',
+        strip_tags($_COOKIE['login']),
+        strip_tags($_COOKIE['password']));
+    }
   }
 
   val_empty("name", $name);
@@ -47,11 +68,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   val_empty("biography", $biography);
   val_empty("check_mark",$check_mark);
 
-  $langsarray = explode(',', $values['lang']);
+  $langsa = explode(',', $values['lang']);
 
+
+  if ($error && !empty($_SESSION['login'])) {
+    try {
+      $dbFD = $db->prepare("SELECT * FROM form_data WHERE user_id = ?");
+      $dbFD->execute([$_SESSION['user_id']]);
+      $fet = $dbFD->fetchAll(PDO::FETCH_ASSOC)[0];
+      $form_id = $fet['id'];
+      $_SESSION['form_id'] = $form_id;
+      $dbL = $db->prepare("SELECT l.name FROM form_data_lang f
+                            LEFT JOIN languages l ON l.id = f.id_lang
+                            WHERE f.id_form = ?");
+      $dbL->execute([$form_id]);
+      $langsa = [];
+      foreach($dbL->fetchAll(PDO::FETCH_ASSOC) as $item){
+        $langsa[] = $item['name'];
+      }
+      setVal('name', $fet['name']);
+      setVal('number', $fet['number']);
+      setVal('email', $fet['email']);
+      setVal('data', date("YYYY-MM-DD", $fet['data']));
+      setVal('radio', $fet['radio']);
+      setVal('lang', $lang);
+      setVal('biography', $fet['biography']);
+      setVal('check_mark', $fet['check_mark']);
+    }
+    catch(PDOException $e){
+      print('Error : ' . $e->getMessage());
+      exit();
+    }
+  }
   include('form.php');
 }
-//POST
 else{ 
   $name = (!empty($_POST['name']) ? $_POST['name'] : '');
   $number = (!empty($_POST['number']) ? $_POST['number'] : '');
@@ -61,7 +111,20 @@ else{
   $lang = (!empty($_POST['lang']) ? $_POST['lang'] : '');
   $biography = (!empty($_POST['biography']) ? $_POST['biography'] : '');
   $check_mark = (!empty($_POST['check_mark']) ? $_POST['check_mark'] : '');
-  $error = false;
+
+  if(isset($_POST['logout_form'])){
+    del_cook('name', 1);
+    del_cook('number', 1);
+    del_cook('email', 1);
+    del_cook('data', 1);
+    del_cook('radio', 1);
+    del_cook('lang', 1);
+    del_cook('biography', 1);
+    del_cook('radio', 1);
+    session_destroy();
+    header('Location: ./');
+    exit();
+  } 
 
   $number1 = preg_replace('/\D/', '', $number);
 
@@ -70,7 +133,7 @@ else{
     $res = false;
     $setVal = $_POST[$cook];
     if ($usl) {
-      setcookie($cook.'_error', $comment, time() + 24 * 60 * 60); 
+      setcookie($cook.'_error', $comment, time() + 24 * 60 * 60); //сохраняем на сутки
       $error = true;
       $res = true;
     }
@@ -80,13 +143,13 @@ else{
       $setVal = ($lang != '') ? implode(",", $lang) : '';
     }
     
-    setcookie($cook.'_value', $setVal, time() + 30 * 24 * 60 * 60); 
+    setcookie($cook.'_value', $setVal, time() + 30 * 24 * 60 * 60); //сохраняем на месяц
     return $res;
   }
   
   if(!val_empty('name', 'Заполните поле', empty($name))){
     if(!val_empty('name', 'Длина поля > 255 символов', strlen($name) > 255)){
-      val_empty('name', 'Поле не соответствует требованиям: <i>Фаимлмя Имя (Отчество)</i>, кириллица', !preg_match('/^([а-яё]+-?[а-яё]+)( [а-яё]+-?[а-яё]+){1,2}$/Diu', $name));
+      val_empty('name', 'Поле не соответствует требованиям: <i>Фаимлмя Имя (Отчество)</i>, латиницей', !preg_match('/^([а-яё]+-?[а-яё]+)( [а-яё]+-?[а-яё]+){1,2}$/Diu', $name));
     }
   }
   if(!val_empty('number', 'Заполните поле', empty($number))){
@@ -127,21 +190,46 @@ else{
   val_empty('check_mark', "Ознакомьтесь с контрактом", empty($check_mark));
   
   if ($error) {
+    // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
     header('Location: index.php');
     exit();
   }
   else {
-    setcookie('name_error', '', time() - 30 * 24 * 60 * 60);
-    setcookie('number_error', '', time() - 30 * 24 * 60 * 60);
-    setcookie('email_error', '', time() - 30 * 24 * 60 * 60);
-    setcookie('data_error', '', time() - 30 * 24 * 60 * 60);
-    setcookie('radio_error', '', time() - 30 * 24 * 60 * 60);
-    setcookie('lang_error', '', time() - 30 * 24 * 60 * 60);
-    setcookie('biography_error', '', time() - 30 * 24 * 60 * 60);
-    setcookie('check_mark_error', '', time() - 30 * 24 * 60 * 60);
-    
+    del_cook('name');
+    del_cook('number');
+    del_cook('email');
+    del_cook('data');
+    del_cook('radio');
+    del_cook('lang');
+    del_cook('biography');
+    del_cook('check_mark');
   }
   
+
+   if ($log) {
+      
+    $stmt = $db->prepare("UPDATE form_data SET name = ?, number = ?, email = ?, data = ?, radio = ?, biography = ? WHERE user_id = ?");
+    $stmt->execute([$name, $number, $email, strtotime($data), $radio, $biography, $_SESSION['user_id']]);
+
+    $stmt = $db->prepare("DELETE FROM form_data_lang WHERE id_form = ?");
+    $stmt->execute([$_SESSION['form_id']]);
+
+    $stmt1 = $db->prepare("INSERT INTO form_data_lang (id_form, id_lang) VALUES (?, ?)");
+    foreach($languages as $row){
+        $stmt1->execute([$_SESSION['form_id'], $row['id']]);
+    }
+   
+  }
+  else {
+    $login = substr(uniqid(), 0, 4).rand(10, 100);
+    $password = rand(100, 1000).substr(uniqid(), 4, 10);
+
+    setcookie('login', $login);
+    setcookie('password', $password);
+
+
+
+
   try {
     $stmt = $db->prepare("INSERT INTO form_data (name, number, email, data, radio, biography) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->execute([$name, $number, $email, $data, $radio, $biography]);
@@ -164,8 +252,12 @@ else{
   setcookie('biography_value', $biography, time() + 24 * 60 * 60 * 365);
   setcookie('check_mark_value', $check_mark, time() + 24 * 60 * 60 * 365);
 
+  
   setcookie('save', '1');
 
   header('Location: index.php');
 }
 ?>
+
+
+

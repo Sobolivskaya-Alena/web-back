@@ -100,7 +100,7 @@
 
         <?php
             if($log) echo '<button type="submit" class="form_button">Изменить</button>';
-            else echo '<button type="submit">Отправить</button>';
+            else echo '<button type="submit" class="form_button">Отправить</button>';
         ?>
 
       <div class="m-3">

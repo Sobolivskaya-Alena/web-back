@@ -13,12 +13,9 @@
     <form action="" method="post">
       <div>
         <div class="header">
-          <h2><b>Форма обратной связи</b></h2>
+          <h2><b>Форма </b></h2>
         </div>
-        <?php 
-            if($log) echo '<button type="submit" class="logout_form" name="logout_form">Выйти</button>'; 
-            else echo '<a href="login.php" class="login_form" name="logout_form">Войти</a>';
-        ?>
+       
         <div class="message"><?php if(isset($messages['success'])) echo $messages['success']; ?></div>
         <div class="message message_info"><?php if(isset($messages['info'])) echo $messages['info']; ?></div>
         <div>
@@ -102,9 +99,17 @@
         </div>
 
         <?php
-            if($log) echo '<button type="submit" class="editBut">Изменить</button>';
+            if($log) echo '<button type="submit" class="form_button">Изменить</button>';
             else echo '<button type="submit">Отправить</button>';
         ?>
+
+      <div class="m-3">
+      <?php 
+            if($log) echo '<button type="submit" class="logout_form" name="logout_form">Выйти</button>'; 
+            else echo '<a href="login.php" class="login_form" name="logout_form">Войти</a>';
+        ?>
+      </div>
+
       </div>
     </form>
 </body>

@@ -47,7 +47,7 @@
           </label>
         </div>
 
-        <div class="my-3">
+        <div class="my-2">
           Пол
           <br />
           <div class>

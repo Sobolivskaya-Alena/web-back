@@ -47,7 +47,7 @@
           </label>
         </div>
 
-        <div class="my-2">
+        <div class="my-3">
           Пол
           <br />
           <div class>
@@ -83,7 +83,7 @@
           </label>
         </div>
 
-        <div class="p-3">
+        <div class="m-3">
           Биография <br />
           <label>
             <textarea name="biography" placeholder="Биография" class="input <?php echo (isp($errors['biography']) != NULL) ? 'borred' : ''; ?>"><?php echo isp($values['biography']); ?></textarea>
@@ -106,7 +106,7 @@
       <div class="m-3">
       <?php 
             if($log) echo '<button type="submit" class="logout_form" name="logout_form">Выйти</button>'; 
-            else echo '<a href="login.php" class="login_form" name="logout_form">Войти</a>';
+            else echo '<a href="login.php" class="form_button" name="logout_form">Войти</a>';
         ?>
       </div>
 

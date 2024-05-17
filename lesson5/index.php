@@ -5,6 +5,9 @@ $db;
 
 include('database.php');
 
+session_start();
+  $log = !empty($_SESSION['login']);
+  
 function isp($value){
   if(isset($value)) return $value;
   return;

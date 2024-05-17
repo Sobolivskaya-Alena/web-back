@@ -46,6 +46,8 @@ function setVal($enName, $param){
     return;
   }
   
+
+//?
   if (!empty($_COOKIE['save'])) {
     setcookie('save', '', 100000);
     setcookie('login', '', 100000);
@@ -111,6 +113,7 @@ else{
   $lang = (!empty($_POST['lang']) ? $_POST['lang'] : '');
   $biography = (!empty($_POST['biography']) ? $_POST['biography'] : '');
   $check_mark = (!empty($_POST['check_mark']) ? $_POST['check_mark'] : '');
+  //$error = false;
 
   if(isset($_POST['logout_form'])){
     del_cook('name', 1);
@@ -206,6 +209,8 @@ else{
   }
   
 
+
+   // Проверяем меняются ли ранее сохраненные данные или отправляются новые.
    if ($log) {
       
     $stmt = $db->prepare("UPDATE form_data SET name = ?, number = ?, email = ?, data = ?, radio = ?, biography = ? WHERE user_id = ?");
@@ -218,12 +223,15 @@ else{
     foreach($languages as $row){
         $stmt1->execute([$_SESSION['form_id'], $row['id']]);
     }
-   
+    // TODO: перезаписать данные в БД новыми данными,
+    // кроме логина и пароля.
   }
   else {
+    // Генерируем уникальный логин и пароль.
+    // TODO: сделать механизм генерации, например функциями rand(), uniquid(), md5(), substr().
     $login = substr(uniqid(), 0, 4).rand(10, 100);
     $password = rand(100, 1000).substr(uniqid(), 4, 10);
-
+    // Сохраняем в Cookies.
     setcookie('login', $login);
     setcookie('password', $password);
 
@@ -251,11 +259,13 @@ else{
   setcookie('lang_value', implode(",", $lang), time() + 24 * 60 * 60 * 365);
   setcookie('biography_value', $biography, time() + 24 * 60 * 60 * 365);
   setcookie('check_mark_value', $check_mark, time() + 24 * 60 * 60 * 365);
-
-  
+}
+  // Сохраняем куку с признаком успешного сохранения.
   setcookie('save', '1');
 
+  // Делаем перенаправление.
   header('Location: index.php');
+
 }
 ?>
 

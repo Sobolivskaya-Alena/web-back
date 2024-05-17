@@ -57,7 +57,7 @@
             </label>
             <br>
             <label>
-                <input cheked type="radio" name="radio" value="f"  <?php if($values['radio'] == 'f') echo 'checked'; ?>>
+                <input checked type="radio" name="radio" value="f"  <?php if($values['radio'] == 'f') echo 'checked'; ?>>
                 <span class="<?php echo ($errors['radio'] != NULL) ? 'colred' : ''; ?>">Женский</span>
             </label>
             <div class="errpodinp"><?php echo $messages['radio']?></div>
@@ -93,7 +93,7 @@
 
       
         <div >
-            <input cheked type="checkbox" name="check_mark" id="oznakomlen" <?php echo ( isp($values['check_mark']) != NULL) ? 'checked' : ''; ?>>
+            <input  checked type="checkbox" name="check_mark" id="oznakomlen" <?php echo ( isp($values['check_mark']) != NULL) ? 'checked' : ''; ?>>
             <label for="oznakomlen" class="<?php echo (isp($errors['check_mark']) != NULL) ? 'colred' : ''; ?>">С контрактом ознакомлен (а)</label>
             <div class="errpodinp"><?php echo $messages['check_mark']?></div>
         </div>

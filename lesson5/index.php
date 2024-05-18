@@ -71,7 +71,7 @@ function setVal($enName, $param){
   val_empty("radio", $radio);
   val_empty("lang", $lang);
   val_empty("biography", $biography);
-  val_empty("check_mark",$check_mark);
+  
 
   $langsa = explode(',', $values['lang']);
 

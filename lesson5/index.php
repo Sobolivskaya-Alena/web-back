@@ -244,7 +244,7 @@ else{
   try {
 
     $stmt=$db->prepare("INSERT INTO users(login, password) VALUES (?, ?)");
-    $stmt1->execute([$login, md5($password) ]);
+    $stmt->execute([$login, md5($password) ]);
 
 
     $fid = $db->lastInsertId();

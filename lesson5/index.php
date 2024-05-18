@@ -218,7 +218,7 @@ else{
       
     $stmt = $db->prepare("UPDATE form_data SET name = ?, number = ?, email = ?, data = ?, radio = ?, biography = ? WHERE user_id = ?");
     /**$stmt->execute([$name, $number, $email, strtotime($data), $radio, $biography, $_SESSION['user_id']]);*/
-     echo $data;
+    var_dump $data;
 
     $stmt = $db->prepare("DELETE FROM form_data_lang WHERE id_form = ?");
     $stmt->execute([$_SESSION['form_id']]);

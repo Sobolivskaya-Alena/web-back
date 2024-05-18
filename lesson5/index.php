@@ -169,7 +169,7 @@ else{
     }
   }
   if(!val_empty('data', "Выберите дату рождения", empty($data))){
-    val_empty('data', "Неверно введена дата рождения, дата больше настоящей", (strtotime("now") < $data));
+    val_empty('data', "Неверно введена дата рождения, дата больше настоящей", (strtotime('now') < strtotime($data)));
   }
   val_empty('radio', "Выберите пол", (empty($radio) || !preg_match('/^(m|f)$/', $radio)));
   if(!val_empty('lang', "Выберите хотя бы один язык", empty($lang))){

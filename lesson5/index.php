@@ -111,7 +111,7 @@ else{
   $name = (!empty($_POST['name']) ? $_POST['name'] : '');
   $number = (!empty($_POST['number']) ? $_POST['number'] : '');
   $email = (!empty($_POST['email']) ? $_POST['email'] : '');
-  $data = (!empty($_POST['data']) ? strtotomi($_POST['data']) : '');
+  $data = (!empty($_POST['data']) ? strtotime($_POST['data']) : '');
   $radio = (!empty($_POST['radio']) ? $_POST['radio'] : '');
   $lang = (!empty($_POST['lang']) ? $_POST['lang'] : '');
   $biography = (!empty($_POST['biography']) ? $_POST['biography'] : '');

@@ -71,7 +71,7 @@ function setVal($enName, $param){
   val_empty("radio", $radio);
   val_empty("lang", $lang);
   val_empty("biography", $biography);
-  
+  val_empty("check_mark",$check_mark);
 
   $langsa = explode(',', $values['lang']);
 
@@ -94,7 +94,7 @@ function setVal($enName, $param){
       setVal('name', $fet['name']);
       setVal('number', $fet['number']);
       setVal('email', $fet['email']);
-      setVal('data', date("YYYY-MM-DD", $fet['data']));
+      setVal('data', date("y-m-d", $fet['data']));
       setVal('radio', $fet['radio']);
       setVal('lang', $lang);
       setVal('biography', $fet['biography']);

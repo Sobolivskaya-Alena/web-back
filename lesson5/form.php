@@ -103,7 +103,7 @@
             else echo '<button type="submit" class="form_button">Отправить</button>';
         ?>
 
-      <div class="mt-2">
+      <div class="mt-4">
       <?php 
             if($log) echo '<button type="submit" class="logout_form" name="logout_form">Выйти</button>'; 
             else echo '<a href="login.php" class="form_button" name="logout_form">Войти</a>';

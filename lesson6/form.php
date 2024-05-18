@@ -5,17 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="bootstrap.min.css" />
-    <link href="style4.css" rel="stylesheet" type="text/css" />
-    <title>Задание №4</title>
+    <link href="style6.css" rel="stylesheet" type="text/css" />
+    <title>Задание №6</title>
   </head>
   <body class="m-4">
       
     <form action="" method="post">
       <div>
         <div class="header">
-          <h2><b>Форма обратной связи</b></h2>
+          <h2><b>Форма </b></h2>
         </div>
+       
         <div class="message"><?php if(isset($messages['success'])) echo $messages['success']; ?></div>
+        <div class="message message_info"><?php if(isset($messages['info'])) echo $messages['info']; ?></div>
         <div>
           <label>
             <input class="input <?php echo (isp($errors['name']) != NULL) ? 'borred' : ''; ?>" value="<?php echo isp($values['name']); ?>" type="text" name="name" placeholder="Ф.И.О">
@@ -48,24 +50,17 @@
         <div class="my-3">
           Пол
           <br />
-          <div class="my-2">
-            <label>
-              <input
-                class="ml-3 <?php echo (isp($errors['radio']) != NULL) ? 'colred' : ''; ?>"
-                type="radio"
-                name="radio"
-                value="m"
-                checked
-              />М
+          <div class>
+          <label>
+                <input type="radio" name="radio" value="m" <?php if($values['radio'] == 'm') echo 'checked'; ?>>
+                <span class=" <?php echo ($errors['radio'] != NULL) ? 'colred' : ''; ?>">Мужской</span>
             </label>
+            <br>
             <label>
-              <input
-                class="ml-3 <?php echo (isp($errors['radio']) != NULL) ? 'colred' : ''; ?>"
-                type="radio"
-                name="radio"
-                value="f"
-              />Ж
+                <input type="radio" name="radio" value="f" ckeked <?php if($values['radio'] == 'f') echo 'checked'; ?>>
+                <span class="<?php echo ($errors['radio'] != NULL) ? 'colred' : ''; ?>">Женский</span>
             </label>
+            <div class="errpodinp"><?php echo $messages['radio']?></div>
           </div>
         </div>
 
@@ -87,8 +82,8 @@
             <div class="errpodinp"><?php echo $messages['lang']?></div>
           </label>
         </div>
-
-        <div>
+        <br />
+        <div class="mt-4">
           Биография <br />
           <label>
             <textarea name="biography" placeholder="Биография" class="input <?php echo (isp($errors['biography']) != NULL) ? 'borred' : ''; ?>"><?php echo isp($values['biography']); ?></textarea>
@@ -98,12 +93,23 @@
 
       
         <div >
-            <input type="checkbox" name="check_mark" id="oznakomlen" <?php echo ( isp($values['check_mark']) != NULL) ? 'checked' : ''; ?>>
-            <label for="oznakomlen" class="<?php echo (isp($errors['check_mark']) != NULL) ? 'colred' : ''; ?>">С контрактом ознакомлен (а)</label>
+            <input type="checkbox" name="check_mark"  <?php echo ( isp($values['check_mark']) != NULL) ? 'checked' : ''; ?>>
+            <label for="check_mark" class="<?php echo (isp($errors['check_mark']) != NULL) ? 'colred' : ''; ?>">С контрактом ознакомлен (а)</label>
             <div class="errpodinp"><?php echo $messages['check_mark']?></div>
         </div>
 
-        <button type="submit" class="form_button my-3">Отправить</button>
+        <?php
+            if($log) echo '<button type="submit" class="form_button">Изменить</button>';
+            else echo '<button type="submit" class="form_button">Отправить</button>';
+        ?>
+
+      <div class="mt-3">
+      <?php 
+            if($log) echo '<button type="submit" class="logout_form" name="logout_form">Выйти</button>'; 
+            else echo '<a href="login.php" class="form_button" name="logout_form">Войти</a>';
+        ?>
+      </div>
+
       </div>
     </form>
 </body>

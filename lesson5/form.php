@@ -83,7 +83,7 @@
           </label>
         </div>
 
-        <div class="p-3">
+        <div class="mt-2">
           Биография <br />
           <label>
             <textarea name="biography" placeholder="Биография" class="input <?php echo (isp($errors['biography']) != NULL) ? 'borred' : ''; ?>"><?php echo isp($values['biography']); ?></textarea>
@@ -103,7 +103,7 @@
             else echo '<button type="submit" class="form_button">Отправить</button>';
         ?>
 
-      <div class="m-3">
+      <div class="mt-2">
       <?php 
             if($log) echo '<button type="submit" class="logout_form" name="logout_form">Выйти</button>'; 
             else echo '<a href="login.php" class="form_button" name="logout_form">Войти</a>';

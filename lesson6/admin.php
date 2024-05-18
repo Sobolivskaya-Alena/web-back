@@ -67,7 +67,6 @@ $haveAdmin = 0;
               echo '</td>
                     <td><a href="./index.php?uid='.$row['user_id'].'" target="_blank">Изменить</a></td>
                     <td><button class="remove">Удалить</button></td>
-                    <td colspan="10" class="form_del hid">Данные удалена</td>
                   </tr>';
             }
           ?>

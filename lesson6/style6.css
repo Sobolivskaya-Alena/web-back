@@ -36,10 +36,9 @@ body{
   width: 20em;
   margin-bottom: 10px;
   margin-top: 5px;
-  width: 100%;
 }
 
-.form_button{  
+.form_button, .login_form, .logout_form{  
   width: 100%;
   display: flex;
   justify-content: center;
@@ -58,10 +57,10 @@ body{
   position: relative;
   top: 0;
 }
-.form_button:hover{
+.form_button, .login_form, .logout_form:hover{
   background-color: rgb(61, 71, 124); 
 }
-.form_button:active{
+.form_button, .login_form, .logout_form:active{
   top: 3px;
   box-shadow: 0 2px 0 #0b0b0b;
 }
@@ -78,5 +77,54 @@ select[multiple] {
 
 
 
+
+
+
+
+
+
+
+
+
+
+/* Общие стили */
+
+
+header {
+  background-color: #f2f2f2;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+header a {
+  text-decoration: none;
+  color: #333;
+  margin-right: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 3px solid #ddd;
+  border-right: 3px solid #ddd; 
+}
+
+th:last-child, td:last-child {
+  border-right: none; 
+}
+
+.analize {
+  margin-top: 20px;
+}
+
+.analize th {
+  background-color: #f2f2f2;
+}
 
 

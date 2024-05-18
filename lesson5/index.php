@@ -50,7 +50,7 @@ function setVal($enName, $param){
   }
   
 
-//?
+
   if (!empty($_COOKIE['save'])) {
     setcookie('save', '', 100000);
     setcookie('login', '', 100000);
@@ -116,7 +116,7 @@ else{
   $lang = (!empty($_POST['lang']) ? $_POST['lang'] : '');
   $biography = (!empty($_POST['biography']) ? $_POST['biography'] : '');
   $check_mark = (!empty($_POST['check_mark']) ? $_POST['check_mark'] : '');
-  //$error = false;
+  $error = false;
 
   if(isset($_POST['logout_form'])){
     del_cook('name', 1);
@@ -238,10 +238,15 @@ else{
     setcookie('login', $login);
     setcookie('password', $password);
 
-
+    
 
 
   try {
+
+    $stmt=$db->prepare("INSERT INTO users(login, password) VALUES (?, ?)");
+    $stmt1->execute([$login, md5($password) ]);
+
+
     $fid = $db->lastInsertId();
     $stmt = $db->prepare("INSERT INTO form_data (user_id, name, number, email, data, radio, biography) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([$fid, $name, $number, $email, $data, $radio, $biography]);

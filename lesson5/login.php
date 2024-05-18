@@ -32,7 +32,7 @@
   else{
     // TODO: Проверть есть ли такой логин и пароль в базе данных.
     // Выдать сообщение об ошибках.
-    require('connection.php');
+    require('database.php');
     $login = $_POST['login'];
     $password = md5($_POST['password']);
     try {

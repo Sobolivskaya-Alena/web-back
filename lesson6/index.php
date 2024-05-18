@@ -97,14 +97,14 @@ function setVal($enName, $param){
     }
   }
 
-  val_empty("name", $name);
-  val_empty("number", $number);
-  val_empty("email", $email);
-  val_empty("data", $data);
-  val_empty("radio", $radio);
-  val_empty("lang", $lang);
-  val_empty("biography", $biography);
-  val_empty("check_mark",$check_mark);
+  val_empty('name', $name);
+  val_empty('number', $number);
+  val_empty('email', $email);
+  val_empty('data', $data);
+  val_empty('radio', $radio);
+  val_empty('lang', $lang);
+  val_empty('biography', $biography);
+  val_empty('check_mark',$check_mark);
 
   $langsa = explode(',', $values['lang']);
 

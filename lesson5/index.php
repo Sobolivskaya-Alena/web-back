@@ -155,7 +155,7 @@ else{
   
   if(!val_empty('name', 'Заполните поле', empty($name))){
     if(!val_empty('name', 'Длина поля > 255 символов', strlen($name) > 255)){
-      val_empty('name', 'Поле не соответствует требованиям: <i>Фаимлмя Имя (Отчество)</i>, латиницей', !preg_match('/^([а-яё]+-?[а-яё]+)( [а-яё]+-?[а-яё]+){1,2}$/Diu', $name));
+      val_empty('name', 'Поле не соответствует требованиям: <i>Фаимлмя Имя (Отчество)</i>, кириллицей', !preg_match('/^([а-яё]+-?[а-яё]+)( [а-яё]+-?[а-яё]+){1,2}$/Diu', $name));
     }
   }
   if(!val_empty('number', 'Заполните поле', empty($number))){
@@ -242,9 +242,9 @@ else{
 
 
   try {
-    $stmt = $db->prepare("INSERT INTO form_data (name, number, email, data, radio, biography) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$name, $number, $email, $data, $radio, $biography]);
     $fid = $db->lastInsertId();
+    $stmt = $db->prepare("INSERT INTO form_data (user_id, name, number, email, data, radio, biography) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$fid, $name, $number, $email, $data, $radio, $biography]);
     $stmt1 = $db->prepare("INSERT INTO form_data_lang (id_form, id_lang) VALUES (?, ?)");
     foreach($languages as $row){
         $stmt1->execute([$fid, $row['id']]);

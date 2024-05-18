@@ -53,7 +53,7 @@
           <div class>
           <label>
                 <input type="radio" name="radio" value="m" <?php if($values['radio'] == 'm') echo 'checked'; ?>>
-                <span class="ml-3 <?php echo ($errors['radio'] != NULL) ? 'colred' : ''; ?>">Мужской</span>
+                <span class=" <?php echo ($errors['radio'] != NULL) ? 'colred' : ''; ?>">Мужской</span>
             </label>
             <br>
             <label>
@@ -83,7 +83,7 @@
           </label>
         </div>
 
-        <div class="m-3">
+        <div class="p-3">
           Биография <br />
           <label>
             <textarea name="biography" placeholder="Биография" class="input <?php echo (isp($errors['biography']) != NULL) ? 'borred' : ''; ?>"><?php echo isp($values['biography']); ?></textarea>

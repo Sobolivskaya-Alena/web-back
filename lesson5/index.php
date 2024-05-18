@@ -94,7 +94,7 @@ function setVal($enName, $param){
       setVal('name', $fet['name']);
       setVal('number', $fet['number']);
       setVal('email', $fet['email']);
-      setVal('data', date("y-m-d", $fet['data']));
+      setVal('data', date("Y-m-d", $fet['data']));
       setVal('radio', $fet['radio']);
       setVal('lang', $lang);
       setVal('biography', $fet['biography']);

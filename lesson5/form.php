@@ -47,17 +47,17 @@
           </label>
         </div>
 
-        <div class="my-2">
+        <div class="my-3">
           Пол
           <br />
           <div class>
           <label>
                 <input type="radio" name="radio" value="m" <?php if($values['radio'] == 'm') echo 'checked'; ?>>
-                <span class=" <?php echo ($errors['radio'] != NULL) ? 'colred' : ''; ?>">Мужской</span>
+                <span class="ml-3 <?php echo ($errors['radio'] != NULL) ? 'colred' : ''; ?>">Мужской</span>
             </label>
             <br>
             <label>
-                <input checked type="radio" name="radio" value="f"  <?php if($values['radio'] == 'f') echo 'checked'; ?>>
+                <input type="radio" name="radio" value="f" ckeked <?php if($values['radio'] == 'f') echo 'checked'; ?>>
                 <span class="<?php echo ($errors['radio'] != NULL) ? 'colred' : ''; ?>">Женский</span>
             </label>
             <div class="errpodinp"><?php echo $messages['radio']?></div>
@@ -83,7 +83,7 @@
           </label>
         </div>
 
-        <div class="mt-2">
+        <div class="m-3">
           Биография <br />
           <label>
             <textarea name="biography" placeholder="Биография" class="input <?php echo (isp($errors['biography']) != NULL) ? 'borred' : ''; ?>"><?php echo isp($values['biography']); ?></textarea>
@@ -93,8 +93,8 @@
 
       
         <div >
-            <input  checked type="checkbox" name="check_mark" id="oznakomlen" <?php echo ( isp($values['check_mark']) != NULL) ? 'checked' : ''; ?>>
-            <label for="oznakomlen" class="<?php echo (isp($errors['check_mark']) != NULL) ? 'colred' : ''; ?>">С контрактом ознакомлен (а)</label>
+            <input type="checkbox" name="check_mark"  <?php echo ( isp($values['check_mark']) != NULL) ? 'checked' : ''; ?>>
+            <label for="check_mark" class="<?php echo (isp($errors['check_mark']) != NULL) ? 'colred' : ''; ?>">С контрактом ознакомлен (а)</label>
             <div class="errpodinp"><?php echo $messages['check_mark']?></div>
         </div>
 
@@ -103,7 +103,7 @@
             else echo '<button type="submit" class="form_button">Отправить</button>';
         ?>
 
-      <div class="mt-3">
+      <div class="m-3">
       <?php 
             if($log) echo '<button type="submit" class="logout_form" name="logout_form">Выйти</button>'; 
             else echo '<a href="login.php" class="form_button" name="logout_form">Войти</a>';

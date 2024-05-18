@@ -40,14 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   if(($adminLog && !empty($getUid)) || !$adminLog){
     $cookAdmin = (!empty($_COOKIE['admin_value']) ? $_COOKIE['admin_value'] : '');
     if($cookAdmin == '1'){
-      del_cook('fio', 1);
-      del_cook('phone', 1);
+      del_cook('name', 1);
+      del_cook('number', 1);
       del_cook('email', 1);
-      del_cook('birthday', 1);
-      del_cook('gender', 1);
-      del_cook('like_lang', 1);
+      del_cook('data', 1);
+      del_cook('radio', 1);
+      del_cook('lang', 1);
       del_cook('biography', 1);
-      del_cook('oznakomlen', 1);
+      del_cook('check_mark', 1);
       del_cook('admin', 1);
     }
 

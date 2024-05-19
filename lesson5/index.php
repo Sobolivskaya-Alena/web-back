@@ -111,7 +111,7 @@ else{
   $name = (!empty($_POST['name']) ? $_POST['name'] : '');
   $number = (!empty($_POST['number']) ? $_POST['number'] : '');
   $email = (!empty($_POST['email']) ? $_POST['email'] : '');
-  $data = (!empty($_POST['data']) ? strtotime($_POST['data']) : '');
+  $data = (!empty($_POST['data']) ? $_POST['data'] : '');
   $radio = (!empty($_POST['radio']) ? $_POST['radio'] : '');
   $lang = (!empty($_POST['lang']) ? $_POST['lang'] : '');
   $biography = (!empty($_POST['biography']) ? $_POST['biography'] : '');
@@ -214,11 +214,12 @@ else{
 
 
    // Проверяем меняются ли ранее сохраненные данные или отправляются новые.
-   if ($log) {
+   if ($log) { 
       
     $stmt = $db->prepare("UPDATE form_data SET name = ?, number = ?, email = ?, data = ?, radio = ?, biography = ? WHERE user_id = ?");
-    /**$stmt->execute([$name, $number, $email, strtotime($data), $radio, $biography, $_SESSION['user_id']]);*/
+    $stmt->execute([$name, $number, $email, strtotime($data), $radio, $biography, $_SESSION['user_id']]);
     var_dump ($data);
+    print_r($db->errorInfo());
 
     $stmt = $db->prepare("DELETE FROM form_data_lang WHERE id_form = ?");
     $stmt->execute([$_SESSION['form_id']]);
@@ -231,6 +232,7 @@ else{
     // кроме логина и пароля.
   }
   else {
+    echo '1';
     // Генерируем уникальный логин и пароль.
     // TODO: сделать механизм генерации, например функциями rand(), uniquid(), md5(), substr().
     $login = substr(uniqid(), 0, 4).rand(10, 100);
@@ -250,7 +252,7 @@ else{
 
     $fid = $db->lastInsertId();
     $stmt = $db->prepare("INSERT INTO form_data (user_id, name, number, email, data, radio, biography) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$fid, $name, $number, $email, $data, $radio, $biography]);
+    $stmt->execute([$fid, $name, $number, $email, strtotime($data), $radio, $biography]);
     $stmt1 = $db->prepare("INSERT INTO form_data_lang (id_form, id_lang) VALUES (?, ?)");
     foreach($languages as $row){
         $stmt1->execute([$fid, $row['id']]);

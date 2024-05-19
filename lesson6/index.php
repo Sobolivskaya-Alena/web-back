@@ -21,9 +21,6 @@ if($adminLog){
 $db;
 
 include('database.php');
-
-//session_start();
-  //$log = !empty($_SESSION['login']);
   
 function isp($value){
   if(isset($value)) return $value;
@@ -50,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       del_cook('check_mark', 1);
       del_cook('admin', 1);
     }
+  }
 
 
   $name = (!empty($_COOKIE['name_error']) ? $_COOKIE['name_error'] : '');
@@ -81,7 +79,7 @@ function setVal($enName, $param){
     del_cook($enName);
     return;
   }
-}
+
 
 
   if (!empty($_COOKIE['save'])) {
@@ -131,7 +129,7 @@ function setVal($enName, $param){
       setVal('radio', $fet['radio']);
       setVal('lang', $lang);
       setVal('biography', $fet['biography']);
-      setVal('check_mark', $fet['check_mark']);
+      setVal('check_mark', '1');
     }
     catch(PDOException $e){
       print('Error : ' . $e->getMessage());
@@ -255,8 +253,7 @@ else{
    if ($log) {
       
     $stmt = $db->prepare("UPDATE form_data SET name = ?, number = ?, email = ?, data = ?, radio = ?, biography = ? WHERE user_id = ?");
-    /**$stmt->execute([$name, $number, $email, strtotime($data), $radio, $biography, $_SESSION['user_id']]);*/
-    var_dump ($data);
+    $stmt->execute([$name, $number, $email, strtotime($data), $radio, $biography, $_SESSION['user_id']]);
 
     $stmt = $db->prepare("DELETE FROM form_data_lang WHERE id_form = ?");
     $stmt->execute([$_SESSION['form_id']]);
@@ -294,7 +291,7 @@ else{
 
     $fid = $db->lastInsertId();
     $stmt = $db->prepare("INSERT INTO form_data (user_id, name, number, email, data, radio, biography) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$fid, $name, $number, $email, $data, $radio, $biography]);
+    $stmt->execute([$fid, $name, $number, $email, strtotime($data), $radio, $biography]);
     $stmt1 = $db->prepare("INSERT INTO form_data_lang (id_form, id_lang) VALUES (?, ?)");
     foreach($languages as $row){
         $stmt1->execute([$fid, $row['id']]);

@@ -16,8 +16,7 @@ $haveAdmin = 0;
     
     exit();
   }
-  print('Авторизация прошла успешно');
-
+  
   ?>
 
 <!DOCTYPE html>
@@ -27,9 +26,10 @@ $haveAdmin = 0;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="bootstrap.min.css" />
     <link href="style6.css" rel="stylesheet" type="text/css" />
+    <script src="jquery-3.4.1.min.js"></script>
     <title>Задание 6</title>
   </head>
-  <body class="m-4 admin">
+  <body class="m-6 py-4 admin">
     <table id="inform">
       <thead>
         <tr>
@@ -97,6 +97,6 @@ $haveAdmin = 0;
       ?>
     </tbody>
     </table>
-    
+    <script src="admin.js"></script>
   </body>
 </html>

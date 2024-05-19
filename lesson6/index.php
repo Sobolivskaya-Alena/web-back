@@ -114,9 +114,9 @@ function setVal($enName, $param){
       $fet = $dbFD->fetchAll(PDO::FETCH_ASSOC)[0];
       $form_id = $fet['id'];
       $_SESSION['form_id'] = $form_id;
-      $dbL = $db->prepare("SELECT l.name FROM form_data_lang f
-                            JOIN languages l ON l.id = f.id_lang
-                            WHERE f.id_form = ?");
+      $dbL = $db->prepare("SELECT l.name FROM form_data_lang fdl
+                            JOIN languages l ON l.id = fdl.id_lang
+                            WHERE id_form = ?");
       $dbL->execute([$form_id]);
       $langsa = [];
       foreach($dbL->fetchAll(PDO::FETCH_ASSOC) as $item){
@@ -287,7 +287,7 @@ else{
 
     $stmt=$db->prepare("INSERT INTO users(login, password) VALUES (?, ?)");
     $stmt->execute([$login, md5($password) ]);
-    //$user_id = $db->lastInsertId();
+    $user_id = $db->lastInsertId();
 
     $fid = $db->lastInsertId();
     $stmt = $db->prepare("INSERT INTO form_data (user_id, name, number, email, data, radio, biography) VALUES (?, ?, ?, ?, ?, ?, ?)");

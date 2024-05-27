@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $lang = (!empty($_COOKIE['lang_error']) ? validinfo($_COOKIE['lang_error']) : '');
   $biography = (!empty($_COOKIE['biography_error']) ? validinfo($_COOKIE['biography_error']) : '');
   $check_mark = (!empty($_COOKIE['check_mark_error']) ? validinfo($_COOKIE['_error']) : '');
-  $csrf_error=(!empty($_COOKIE['csrf_error']) ? validinfo($_COOKIE['_error']) : '');
+  $csrf_error=(!empty($_COOKIE['csrf_error']) ? validinfo($_COOKIE['csrf_error']) : '');
 
   $errors = array();
   $messages = array();
@@ -137,7 +137,7 @@ function setVal($enName, $param){
       setVal('radio', $fet['radio']);
       setVal('lang', $lang);
       setVal('biography', $fet['biography']);
-      setVal('check_mark', $fet['check_mark']);
+      setVal('check_mark', '1');
     }
     catch(PDOException $e){
       print('Error : ' . $e->getMessage());
@@ -155,7 +155,7 @@ else{
   $lang = (!empty($_POST['lang']) ? $_POST['lang'] : '');
   $biography = (!empty($_POST['biography']) ? validinfo($_POST['biography']) : '');
   $check_mark = (!empty($_POST['check_mark']) ? validinfo($_POST['check_mark']) : '');
-  $csrf_token = (!empty($_POST['csrf_token']) ? $_POST['csrf_token'] : '');
+  $csrf_tokens = (!empty($_POST['csrf_token']) ? $_POST['csrf_token'] : '');
   $error = false;
 
   if($_SESSION['csrf_token'] != $csrf_tokens){
@@ -268,8 +268,7 @@ else{
    if ($log) {
       
     $stmt = $db->prepare("UPDATE form_data SET name = ?, number = ?, email = ?, data = ?, radio = ?, biography = ? WHERE user_id = ?");
-    /**$stmt->execute([$name, $number, $email, strtotime($data), $radio, $biography, $_SESSION['user_id']]);*/
-    var_dump ($data);
+    $stmt->execute([$name, $number, $email, strtotime($data), $radio, $biography, $uid]);
 
     $stmt = $db->prepare("DELETE FROM form_data_lang WHERE id_form = ?");
     $stmt->execute([$_SESSION['form_id']]);
@@ -303,14 +302,13 @@ else{
 
     $stmt=$db->prepare("INSERT INTO users(login, password) VALUES (?, ?)");
     $stmt->execute([$login, md5($password) ]);
-    //$user_id = $db->lastInsertId();
+    $user_id = $db->lastInsertId();
 
-    $fid = $db->lastInsertId();
     $stmt = $db->prepare("INSERT INTO form_data (user_id, name, number, email, data, radio, biography) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$fid, $name, $number, $email, $data, $radio, $biography]);
+    $stmt->execute([$user_id, $name, $number, $email, strtotime($data), $radio, $biography]);
     $stmt1 = $db->prepare("INSERT INTO form_data_lang (id_form, id_lang) VALUES (?, ?)");
     foreach($languages as $row){
-        $stmt1->execute([$fid, $row['id']]);
+        $stmt1->execute([$user_id, $row['id']]);
     }
   }
   catch(PDOException $e){

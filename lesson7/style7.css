@@ -70,9 +70,13 @@ select[multiple] {
   font-family: 'Open Sans', sans-serif;
 }
 
-
-
-
+.colred,
+.message_error{
+    color: red !important;
+}
+.message_info{
+    color: rgba(28, 20, 173, 0.674) !important;
+}
 
 
 header {

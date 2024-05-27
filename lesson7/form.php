@@ -11,6 +11,11 @@
   <body class="m-4">
       
     <form action="" method="post">
+    <?php
+            $csrf_token = bin2hex(random_bytes(32));
+            $_SESSION['csrf_token'] = $csrf_token;
+        ?>
+         <input type="hidden" name='csrf_token' value='<?php echo $csrf_token; ?>'>
       <div>
         <div class="header">
           <h2><b>Форма </b></h2>
@@ -18,6 +23,7 @@
        
         <div class="message"><?php if(isset($messages['success'])) echo $messages['success']; ?></div>
         <div class="message message_info"><?php if(isset($messages['info'])) echo $messages['info']; ?></div>
+        <div class="message message_error"><?php if(isset($messages['error'])) echo $messages['error']; ?></div>
         <div>
           <label>
             <input class="input <?php echo (isp($errors['name']) != NULL) ? 'borred' : ''; ?>" value="<?php echo isp($values['name']); ?>" type="text" name="name" placeholder="Ф.И.О">
